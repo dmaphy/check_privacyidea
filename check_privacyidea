@@ -30,9 +30,23 @@ USER=cornelius
 PIN=1234
 OTP_SEED=58a0fbc8ff2c391db88ced63cf8115d1b8b947e1
 REALM=themis
-OTP_CMD=oathtool
-# Package httpie
-HTTP_CMD=http
+
+# Package oathtool needs to be installed
+OTP_CMD='/usr/bin/oathtool'
+
+if [ ! -x ${OTP_CMD} ]; then
+    echo "Could not find ${OTP_CMD}. Make sure oathtool is installed."
+    exit ${UNKNOWN};
+fi
+
+# Package httpie needs to be installed
+HTTP_CMD='/usr/bin/http'
+
+if [ ! -x ${HTTP_CMD} ]; then
+    echo "Could not find ${HTTP_CMD}. Make sure httpie is installed."
+    exit ${UNKNOWN};
+fi
+
 USER_AGENT=icinga_check
 
 # This is the token with the serial TOTP00295075
